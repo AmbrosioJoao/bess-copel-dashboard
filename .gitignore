@@ -1,0 +1,19 @@
+# Arquivos locais que não devem ir para o GitHub
+problema-copel.md
+link.md
+Perguntas para o entrevistado (Oficina de Integração).pdf
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Sistema/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
