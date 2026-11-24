@@ -1,6 +1,6 @@
-# BESS Rural — painel SCADA simplificado
+# BESS — painel SCADA simplificado
 
-Site estático publicado com GitHub Pages. Mostra um SEP rural de 13,8 kV, uma falha clicável no alimentador e dois indicadores: tensão da bateria e economia estimada em reais.
+Site estático publicado com GitHub Pages. Mostra um SEP de distribuição de 13,8 kV, uma falha clicável no alimentador e dois indicadores: tensão da bateria e economia estimada em reais.
 
 ## Conteúdo
 

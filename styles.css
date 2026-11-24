@@ -235,6 +235,18 @@ svg {
   stroke: var(--accent);
 }
 
+.device {
+  fill: #ffffff;
+  stroke: #8a8a8a;
+  stroke-width: 2;
+}
+
+.device-mark {
+  stroke: #8a8a8a;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
 .fault-ring {
   fill: none;
   stroke: var(--accent);
@@ -258,6 +270,17 @@ svg {
   font-size: 12px;
 }
 
+.svg-label.tiny {
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.svg-label.alarm-text {
+  fill: var(--accent);
+  font-size: 12px;
+  font-weight: 650;
+}
+
 .diagram-stage.resolved .wire.alarm {
   stroke: #8a8a8a;
   stroke-dasharray: none;
@@ -267,10 +290,14 @@ svg {
   stroke: #8a8a8a;
 }
 
+.diagram-stage.resolved .svg-label.alarm-text {
+  fill: var(--muted);
+}
+
 .fault {
   position: absolute;
-  left: 60%;
-  top: 40%;
+  left: 65%;
+  top: 36.7%;
   transform: translate(-50%, -50%);
   width: 34px;
   height: 34px;
@@ -320,6 +347,10 @@ svg {
 
 .dot.alarm {
   background: var(--accent);
+}
+
+.dot.square {
+  border-radius: 2px;
 }
 
 .occurrence[hidden] {

@@ -8,6 +8,7 @@ const batteryVoltage = document.getElementById("batteryVoltage");
 const voltageHint = document.getElementById("voltageHint");
 const savingsValue = document.getElementById("savingsValue");
 const savingsHint = document.getElementById("savingsHint");
+const faultVoltage = document.getElementById("faultVoltage");
 const occurrenceState = document.getElementById("occurrenceState");
 const occurrenceText = document.getElementById("occurrenceText");
 const detailLocation = document.getElementById("detailLocation");
@@ -20,27 +21,29 @@ const states = {
     voltageHint: "CC · banco em descarga",
     savings: "R$ 18.450",
     savingsHint: "por mês · evita reforço de rede",
+    faultVoltage: "0,93 pu",
     tag: "Ocorrência ativa",
     tagClass: "tag alarm",
     state: "Aberta",
-    text: "Queda de tensão no trecho rural. A carga de irrigação, somada aos 7 km de linha, derruba a tensão no final do alimentador.",
-    location: "Final do alimentador rural",
+    text: "Queda de tensão entre T1 e o religador R1. O pico de irrigação e a distância do trecho derrubam a tensão antes da carga B.",
+    location: "Trecho 2 · entre T1 e R1",
     cause: "Pico de irrigação",
     action: "BESS injeta potência e sustenta a tensão",
     button: "Aplicar BESS e encerrar",
     marker: "!",
-    aria: "Falha ativa: queda de tensão no final do alimentador"
+    aria: "Falha ativa: queda de tensão entre T1 e R1"
   },
   resolved: {
     voltage: "812",
     voltageHint: "CC · tensão estabilizada",
     savings: "R$ 20.300",
     savingsHint: "por mês · reforço de rede evitado",
+    faultVoltage: "1,00 pu",
     tag: "Alimentador estável",
     tagClass: "tag ok",
     state: "Encerrada",
-    text: "O BESS assumiu a descarga no ponto de conexão e recuperou a tensão do trecho, evitando o reforço da linha rural.",
-    location: "Final do alimentador rural",
+    text: "O BESS assumiu a descarga no ponto de conexão e recuperou a tensão do trecho, evitando o reforço da rede.",
+    location: "Trecho 2 · entre T1 e R1",
     cause: "Corrigida pelo BESS",
     action: "Monitoramento mantido pelo operador",
     button: "Reabrir ocorrência (demonstração)",
@@ -58,6 +61,7 @@ function render() {
   voltageHint.textContent = state.voltageHint;
   savingsValue.textContent = state.savings;
   savingsHint.textContent = state.savingsHint;
+  faultVoltage.textContent = state.faultVoltage;
   statusTag.textContent = state.tag;
   statusTag.className = state.tagClass;
   occurrenceState.textContent = state.state;

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BESS Rural · COPEL | UTFPR</title>
-  <meta name="description" content="Painel SCADA simplificado de um alimentador rural com BESS.">
+  <title>BESS · COPEL | UTFPR</title>
+  <meta name="description" content="Painel SCADA simplificado de um SEP de distribuição com BESS.">
   <link rel="icon" href="assets/copel.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,8 +17,8 @@
     </div>
     <div class="heading">
       <p class="eyebrow">Oficina de Integração · Protótipo</p>
-      <h1>BESS Rural</h1>
-      <p class="subtitle">Monitoramento simplificado de alimentador rural</p>
+      <h1>BESS</h1>
+      <p class="subtitle">Aplicação de monitoramento de SEP</p>
     </div>
   </header>
 
@@ -45,7 +45,7 @@
     <section class="panel" aria-labelledby="sep-title">
       <div class="section-head">
         <div>
-          <h2 id="sep-title">SEP · Alimentador rural</h2>
+          <h2 id="sep-title">SEP · Alimentador de distribuição</h2>
           <p class="subtitle">Clique no ponto laranja para inspecionar a falha</p>
         </div>
         <span class="badge">13,8 kV</span>
@@ -54,39 +54,67 @@
       <div class="diagram-wrap">
         <div class="diagram-stage" id="diagramStage">
           <svg viewBox="0 0 900 300" role="img" aria-labelledby="svgTitle svgDesc">
-            <title id="svgTitle">Diagrama unifilar do alimentador rural</title>
-            <desc id="svgDesc">Subestação rural de 13,8 quilovolts, linha de 7 quilômetros, transformador, carga de irrigação e BESS conectado ao final do trecho.</desc>
+            <title id="svgTitle">Diagrama unifilar do alimentador de distribuição</title>
+            <desc id="svgDesc">Subestação de 13,8 quilovolts, disjuntor, chave seccionalizadora, transformadores T1 e T2, religador R1, duas cargas e BESS conectado entre o trecho com falha e o religador.</desc>
 
-            <line x1="30" y1="120" x2="860" y2="120" class="guide"/>
+            <line x1="20" y1="110" x2="880" y2="110" class="guide"/>
 
-            <rect x="30" y="75" width="130" height="90" rx="8" class="node-box"/>
-            <text x="95" y="103" class="svg-label strong" text-anchor="middle">SE RURAL</text>
-            <text x="95" y="125" class="svg-label" text-anchor="middle">13,8 kV</text>
-            <text x="95" y="145" class="svg-label muted" text-anchor="middle">Subestação</text>
+            <rect x="25" y="70" width="125" height="80" rx="8" class="node-box"/>
+            <text x="87" y="98" class="svg-label strong" text-anchor="middle">SE</text>
+            <text x="87" y="118" class="svg-label" text-anchor="middle">13,8 kV</text>
+            <text x="87" y="138" class="svg-label muted" text-anchor="middle">Subestação</text>
 
-            <line x1="160" y1="120" x2="700" y2="120" class="wire"/>
-            <circle cx="320" cy="120" r="5" class="joint"/>
-            <text x="320" y="96" class="svg-label" text-anchor="middle">7 km de linha rural</text>
+            <line x1="150" y1="110" x2="176" y2="110" class="wire"/>
+            <rect x="176" y="101" width="18" height="18" rx="2" class="device"/>
+            <line x1="179" y1="116" x2="191" y2="104" class="device-mark"/>
+            <text x="185" y="92" class="svg-label muted" text-anchor="middle">Disj.</text>
 
-            <circle cx="400" cy="120" r="17" class="node"/>
-            <circle cx="424" cy="120" r="17" class="node"/>
-            <text x="412" y="163" class="svg-label" text-anchor="middle">Trafo 13,8/0,22 kV</text>
+            <line x1="194" y1="110" x2="326" y2="110" class="wire"/>
+            <text x="265" y="94" class="svg-label muted" text-anchor="middle">Trecho 1 · 4 km</text>
+            <circle cx="326" cy="110" r="6" class="device"/>
+            <circle cx="348" cy="110" r="6" class="device"/>
+            <line x1="326" y1="110" x2="348" y2="110" class="device-mark"/>
+            <text x="337" y="92" class="svg-label muted" text-anchor="middle">Chave A</text>
 
-            <line x1="510" y1="120" x2="570" y2="120" class="wire alarm"/>
-            <circle cx="540" cy="120" r="7" class="fault-ring"/>
+            <line x1="354" y1="110" x2="434" y2="110" class="wire"/>
+            <circle cx="444" cy="110" r="16" class="node"/>
+            <circle cx="468" cy="110" r="16" class="node"/>
+            <text x="456" y="148" class="svg-label" text-anchor="middle">T1</text>
+            <line x1="456" y1="126" x2="456" y2="180" class="wire tap"/>
+            <rect x="386" y="180" width="140" height="58" rx="8" class="node-box"/>
+            <text x="456" y="204" class="svg-label strong" text-anchor="middle">Carga A</text>
+            <text x="456" y="223" class="svg-label muted" text-anchor="middle">Irrigação · 0,22 kV</text>
 
-            <line x1="540" y1="120" x2="540" y2="210" class="wire tap"/>
-            <rect x="470" y="210" width="140" height="62" rx="8" class="node-box bess-box"/>
-            <text x="540" y="235" class="svg-label strong" text-anchor="middle">BESS</text>
-            <text x="540" y="255" class="svg-label" text-anchor="middle">2 MW / 8 MWh</text>
+            <line x1="484" y1="110" x2="560" y2="110" class="wire"/>
+            <line x1="560" y1="110" x2="610" y2="110" class="wire alarm"/>
+            <circle cx="585" cy="110" r="7" class="fault-ring"/>
+            <text x="585" y="86" class="svg-label alarm-text" id="faultVoltage" text-anchor="middle">0,93 pu</text>
 
-            <rect x="700" y="80" width="160" height="80" rx="8" class="node-box"/>
-            <text x="780" y="110" class="svg-label strong" text-anchor="middle">Carga rural</text>
-            <text x="780" y="131" class="svg-label" text-anchor="middle">Irrigação</text>
-            <text x="780" y="149" class="svg-label muted" text-anchor="middle">0,22 kV</text>
+            <line x1="610" y1="110" x2="635" y2="110" class="wire"/>
+            <rect x="635" y="99" width="26" height="22" rx="3" class="device"/>
+            <text x="648" y="114" class="svg-label tiny" text-anchor="middle">R1</text>
+            <text x="648" y="92" class="svg-label muted" text-anchor="middle">Religador</text>
+
+            <line x1="661" y1="110" x2="770" y2="110" class="wire"/>
+            <text x="710" y="94" class="svg-label muted" text-anchor="middle">Trecho 2 · 3 km</text>
+            <circle cx="780" cy="110" r="16" class="node"/>
+            <circle cx="804" cy="110" r="16" class="node"/>
+            <text x="792" y="148" class="svg-label" text-anchor="middle">T2</text>
+            <line x1="792" y1="126" x2="792" y2="180" class="wire tap"/>
+            <rect x="722" y="180" width="140" height="58" rx="8" class="node-box"/>
+            <text x="792" y="204" class="svg-label strong" text-anchor="middle">Carga B</text>
+            <text x="792" y="223" class="svg-label muted" text-anchor="middle">Moradia · 0,22 kV</text>
+
+            <line x1="610" y1="110" x2="610" y2="170" class="wire tap"/>
+            <rect x="603" y="170" width="14" height="14" rx="2" class="device"/>
+            <line x1="606" y1="182" x2="614" y2="172" class="device-mark"/>
+            <line x1="610" y1="184" x2="610" y2="230" class="wire tap"/>
+            <rect x="540" y="230" width="150" height="58" rx="8" class="node-box bess-box"/>
+            <text x="615" y="254" class="svg-label strong" text-anchor="middle">BESS</text>
+            <text x="615" y="273" class="svg-label" text-anchor="middle">2 MW / 8 MWh</text>
           </svg>
 
-          <button class="fault" id="faultButton" type="button" aria-expanded="false" aria-controls="occurrencePanel" aria-label="Falha: queda de tensão no final do alimentador">
+          <button class="fault" id="faultButton" type="button" aria-expanded="false" aria-controls="occurrencePanel" aria-label="Falha: queda de tensão entre T1 e R1">
             !
           </button>
         </div>
@@ -95,6 +123,7 @@
       <ul class="legend" aria-label="Legenda">
         <li><span class="dot alarm" aria-hidden="true"></span> Falha clicável</li>
         <li><span class="dot" aria-hidden="true"></span> Trecho em operação</li>
+        <li><span class="dot square" aria-hidden="true"></span> Dispositivos</li>
       </ul>
     </section>
 
@@ -107,7 +136,7 @@
       <dl class="details">
         <div>
           <dt>Local</dt>
-          <dd id="detailLocation">Final do alimentador</dd>
+          <dd id="detailLocation">Trecho 2 · entre T1 e R1</dd>
         </div>
         <div>
           <dt>Causa</dt>
