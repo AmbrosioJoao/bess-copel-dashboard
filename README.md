@@ -21,4 +21,6 @@ Acesse `http://localhost:8000`.
 
 ## Publicação
 
-O site é servido diretamente da branch `main` pelo GitHub Pages.
+Site: https://ambrosiojoao.github.io/bess-copel-dashboard/
+
+Servido diretamente da branch `main` pelo GitHub Pages.
