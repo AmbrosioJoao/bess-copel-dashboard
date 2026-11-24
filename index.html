@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BESS Rural · COPEL | UTFPR</title>
+  <meta name="description" content="Painel SCADA simplificado de um alimentador rural com BESS.">
+  <link rel="icon" href="assets/copel.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brands" aria-label="Instituições">
+      <img class="logo utfpr" src="assets/utfpr.svg" alt="UTFPR">
+      <span class="brand-divider" aria-hidden="true"></span>
+      <img class="logo copel" src="assets/copel.svg" alt="COPEL">
+    </div>
+    <div class="heading">
+      <p class="eyebrow">Oficina de Integração · Protótipo</p>
+      <h1>BESS Rural</h1>
+      <p class="subtitle">Monitoramento simplificado de alimentador rural</p>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel" aria-labelledby="indicadores-title">
+      <div class="section-head">
+        <h2 id="indicadores-title">Indicadores</h2>
+        <span class="tag alarm" id="statusTag">Ocorrência ativa</span>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <p class="label">Tensão da bateria</p>
+          <p class="value"><span id="batteryVoltage">792</span> <span class="unit">V</span></p>
+          <p class="hint" id="voltageHint">CC · banco em descarga</p>
+        </article>
+        <article class="card">
+          <p class="label">Economia estimada</p>
+          <p class="value" id="savingsValue">R$ 18.450</p>
+          <p class="hint" id="savingsHint">por mês · evita reforço de rede</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="sep-title">
+      <div class="section-head">
+        <div>
+          <h2 id="sep-title">SEP · Alimentador rural</h2>
+          <p class="subtitle">Clique no ponto laranja para inspecionar a falha</p>
+        </div>
+        <span class="badge">13,8 kV</span>
+      </div>
+
+      <div class="diagram-wrap">
+        <div class="diagram-stage" id="diagramStage">
+          <svg viewBox="0 0 900 300" role="img" aria-labelledby="svgTitle svgDesc">
+            <title id="svgTitle">Diagrama unifilar do alimentador rural</title>
+            <desc id="svgDesc">Subestação rural de 13,8 quilovolts, linha de 7 quilômetros, transformador, carga de irrigação e BESS conectado ao final do trecho.</desc>
+
+            <line x1="30" y1="120" x2="860" y2="120" class="guide"/>
+
+            <rect x="30" y="75" width="130" height="90" rx="8" class="node-box"/>
+            <text x="95" y="103" class="svg-label strong" text-anchor="middle">SE RURAL</text>
+            <text x="95" y="125" class="svg-label" text-anchor="middle">13,8 kV</text>
+            <text x="95" y="145" class="svg-label muted" text-anchor="middle">Subestação</text>
+
+            <line x1="160" y1="120" x2="700" y2="120" class="wire"/>
+            <circle cx="320" cy="120" r="5" class="joint"/>
+            <text x="320" y="96" class="svg-label" text-anchor="middle">7 km de linha rural</text>
+
+            <circle cx="400" cy="120" r="17" class="node"/>
+            <circle cx="424" cy="120" r="17" class="node"/>
+            <text x="412" y="163" class="svg-label" text-anchor="middle">Trafo 13,8/0,22 kV</text>
+
+            <line x1="510" y1="120" x2="570" y2="120" class="wire alarm"/>
+            <circle cx="540" cy="120" r="7" class="fault-ring"/>
+
+            <line x1="540" y1="120" x2="540" y2="210" class="wire tap"/>
+            <rect x="470" y="210" width="140" height="62" rx="8" class="node-box bess-box"/>
+            <text x="540" y="235" class="svg-label strong" text-anchor="middle">BESS</text>
+            <text x="540" y="255" class="svg-label" text-anchor="middle">2 MW / 8 MWh</text>
+
+            <rect x="700" y="80" width="160" height="80" rx="8" class="node-box"/>
+            <text x="780" y="110" class="svg-label strong" text-anchor="middle">Carga rural</text>
+            <text x="780" y="131" class="svg-label" text-anchor="middle">Irrigação</text>
+            <text x="780" y="149" class="svg-label muted" text-anchor="middle">0,22 kV</text>
+          </svg>
+
+          <button class="fault" id="faultButton" type="button" aria-expanded="false" aria-controls="occurrencePanel" aria-label="Falha: queda de tensão no final do alimentador">
+            !
+          </button>
+        </div>
+      </div>
+
+      <ul class="legend" aria-label="Legenda">
+        <li><span class="dot alarm" aria-hidden="true"></span> Falha clicável</li>
+        <li><span class="dot" aria-hidden="true"></span> Trecho em operação</li>
+      </ul>
+    </section>
+
+    <section class="panel occurrence" id="occurrencePanel" aria-live="polite" hidden>
+      <div class="section-head">
+        <h2>Ocorrência</h2>
+        <span class="badge" id="occurrenceState">Aberta</span>
+      </div>
+      <p class="occurrence-text" id="occurrenceText"></p>
+      <dl class="details">
+        <div>
+          <dt>Local</dt>
+          <dd id="detailLocation">Final do alimentador</dd>
+        </div>
+        <div>
+          <dt>Causa</dt>
+          <dd id="detailCause">Pico de irrigação</dd>
+        </div>
+        <div>
+          <dt>Ação</dt>
+          <dd id="detailAction">Suporte de tensão pelo BESS</dd>
+        </div>
+      </dl>
+      <button class="primary" id="resolveButton" type="button">Aplicar BESS e encerrar</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Protótipo demonstrativo para a disciplina · valores ilustrativos.</p>
+    <p>Documentos de referência mantidos no repositório local.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
